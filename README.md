@@ -1,4 +1,4 @@
-# mnk_designpatterns
+# mnk_javabasic
 MNKnowledge Java Basics
 
 For details, please see 

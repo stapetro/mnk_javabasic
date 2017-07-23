@@ -9,12 +9,20 @@
 group 'com.mnknowledge'
 version '1.0-SNAPSHOT'
 
+description = 'Java Basics'
+
 apply plugin: 'java'
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+
+sourceCompatibility = JavaVersion.VERSION_1_9
+targetCompatibility = JavaVersion.VERSION_1_9
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
 
 repositories {
+    jcenter()
     mavenCentral()
 }
 
