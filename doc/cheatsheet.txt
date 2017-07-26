@@ -1,0 +1,18 @@
+--- JDK ----------------------
+java com.mnknowledge.App
+jar -cf hello.jar com/mnknowledge/App.class
+jar cvfe helloM.jar com.mnknowledge.App com/mnknowledge/*.class
+jar -tf hello.jar
+java -jar hello.jar
+java -cp hello.jar com.mnknowledge.App
+--- Maven ----------------------
+mvn -version
+mvn clean package
+--- Gradle ----------------------
+$ gradle wrapper --gradle-version 4.0.1 --distribution-type all	
+./gradlew -q dependencies
+./gradlew -q dependencies --configuration=compile
+./gradlew -q projects
+./gradlew -q :tasks
+./gradlew -q properties
+./gradlew --status
