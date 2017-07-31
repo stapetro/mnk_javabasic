@@ -5,13 +5,15 @@ import java.util.Arrays;
 public class MySorting {
 
 
-    int[] arr = {8, 5, 7, 1, 9, 3};
+    private final int[] arr;
 
-
+    public MySorting(final int[] pArr) {
+        arr = Arrays.copyOf(pArr, pArr.length);
+    }
 
     public void sort() {
-        int min = 0;
-        for (int j = 0; j < arr.length-1; j++) {
+        int min;
+        for (int j = 0; j < arr.length - 1; j++) {
             min = j;
             for (int i = j + 1; i < arr.length; i++) {
                 if (arr[i] < arr[min]) {
@@ -29,6 +31,18 @@ public class MySorting {
         }
 
     }
+
+    public int[] getArr() {
+        return arr;
+    }
+
+    @Override
+    public String toString() {
+        return "MySorting{" +
+                "arr=" + Arrays.toString(arr) +
+                '}';
+    }
+
     private void swapValue(int[] arr, int leftIndex, int rightIndex) {
         int tmp = arr[rightIndex];
         arr[rightIndex] = arr[leftIndex];
