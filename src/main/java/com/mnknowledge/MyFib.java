@@ -16,8 +16,7 @@ public class MyFib {
         Scanner in = new Scanner(System.in);
         System.out.println("How many numbers should be printed?");
         int input = in.nextInt();
-        for(int i = 1; i<=input; i++)
-        {
+        for(int i = 1; i<=input; i++) {
             System.out.print(fibonacci(i)+" ");
         }
 
