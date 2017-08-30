@@ -5,11 +5,20 @@ package com.mnknowledge.concurrency;
  */
 public class BetterTask implements Runnable {
     private User user;
+    private boolean executed = false;
 
     public BetterTask(User user) {
         this.user = user;
     }
 
+
+    public synchronized boolean isExecuted() {
+        return executed;
+    }
+
+    public synchronized void setExecuted(boolean executed) {
+        this.executed = executed;
+    }
 
     @Override
     public void run() {
@@ -19,5 +28,9 @@ public class BetterTask implements Runnable {
             e.printStackTrace();
         }
         System.out.println(Thread.currentThread().getName() + ": Hello world from my better task from user " + user.getName());
+        synchronized (user) {
+            setExecuted(true);
+            user.notify();
+        }
     }
 }

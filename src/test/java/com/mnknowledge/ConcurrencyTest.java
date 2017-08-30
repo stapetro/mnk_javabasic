@@ -4,24 +4,50 @@ import com.mnknowledge.concurrency.BetterTask;
 import com.mnknowledge.concurrency.Task;
 import com.mnknowledge.concurrency.User;
 
+import org.assertj.core.api.Assertions;
+import org.junit.Before;
 import org.junit.Test;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * @author Stanislav Petrov
  */
 public class ConcurrencyTest {
+    private BetterTask betterTask;
+    private User ivan;
+
+    @Before
+    public void setUp() {
+        ivan = new User("ivan georgiev");
+        betterTask = new BetterTask(ivan);
+    }
+
     @Test
     public void testConcurrency() throws InterruptedException {
-        User ivan = new User("ivan georgiev");
+
         System.out.println(Thread.currentThread().getName() + ": tests task execution");
         Task task = new Task("heavyTask", ivan);
         Task task1 = new Task();
         task.start();
-        Thread betterTaskThread = new Thread(new BetterTask(ivan), "flexibleHeavyTask");
+        Thread betterTaskThread = new Thread(betterTask, "flexibleHeavyTask");
         betterTaskThread.start();
         System.out.println(Thread.currentThread().getName() + ": is waiting");
         betterTaskThread.join();
-        new Thread(new BetterTask(ivan), "flexibleTask2").start();
+        new Thread(betterTask, "flexibleTask2").start();
         task1.start();
+    }
+
+    @Test
+    public void testExecutors() throws InterruptedException {
+        ExecutorService singleExec = Executors.newSingleThreadExecutor();
+        singleExec.execute(betterTask);
+        singleExec.shutdown();
+
+        synchronized (ivan) {
+            ivan.wait();
+            Assertions.assertThat(betterTask.isExecuted()).isTrue();
+        }
     }
 }
