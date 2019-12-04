@@ -15,3 +15,5 @@ nb-configuration.xml
 *.iml
 .idea/
 .idea_modules/
+target
+.gradle

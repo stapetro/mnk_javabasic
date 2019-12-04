@@ -1,9 +1,9 @@
 package com.mnknowledge;
 
-import org.assertj.core.api.Assertions;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
@@ -14,13 +14,13 @@ public class MySortingTest {
     private MySorting mySorting;
     private int[] shuffledArr;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeEach
+    public void setUp() {
         shuffledArr = new int[]{8, 5, 7, 1, 9, 3};
         mySorting = new MySorting(shuffledArr);
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         shuffledArr = null;
     }
@@ -37,7 +37,7 @@ public class MySortingTest {
         final int[] actualArr = mySorting.getArr();
 
         //assert
-        Assertions.assertThat(actualArr).isEqualTo(shuffledArr);
+        Assertions.assertArrayEquals(actualArr, shuffledArr);
     }
 
 }

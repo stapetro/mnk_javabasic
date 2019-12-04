@@ -3,10 +3,9 @@ package com.mnknowledge;
 import com.mnknowledge.concurrency.BetterTask;
 import com.mnknowledge.concurrency.Task;
 import com.mnknowledge.concurrency.User;
-
-import org.assertj.core.api.Assertions;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -18,7 +17,7 @@ public class ConcurrencyTest {
     private BetterTask betterTask;
     private User ivan;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         ivan = new User("ivan georgiev");
         betterTask = new BetterTask(ivan);
@@ -47,7 +46,7 @@ public class ConcurrencyTest {
 
         synchronized (ivan) {
             ivan.wait();
-            Assertions.assertThat(betterTask.isExecuted()).isTrue();
+            Assertions.assertTrue(betterTask.isExecuted());
         }
     }
 }
